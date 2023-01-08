@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:click_it/pages/agreement_page.dart';
 import 'package:click_it/pages/bookings_page.dart';
 import 'package:click_it/pages/editprofile_page.dart';
@@ -27,7 +29,17 @@ hasAccess() async {
   }
 }
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 Future main() async {
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
   Constants.prefs = await SharedPreferences.getInstance();
