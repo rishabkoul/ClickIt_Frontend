@@ -10,8 +10,6 @@ import 'package:flutter/scheduler.dart';
 import '../constants.dart' as constants;
 import 'package:http/http.dart' as http;
 
-import '../utlis/constants.dart';
-
 import 'dart:convert';
 
 import 'package:click_it/widgets/show_alert.dart';
@@ -44,7 +42,7 @@ class _PhotographersPageState extends State<PhotographersPage> {
   checkLocation() {
     if (Constants.prefs!.getDouble("latitude") == null &&
         Constants.prefs!.getDouble("longitude") == null) {
-      SchedulerBinding.instance!.addPostFrameCallback((_) async {
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/setlocation', (Route<dynamic> route) => false);
       });
@@ -111,7 +109,6 @@ class _PhotographersPageState extends State<PhotographersPage> {
 
       // editingProfile = false;
       // setState(() {});
-
     } else {
       return showAlertDialog(context, "Access Denied", "Auth token missing");
     }

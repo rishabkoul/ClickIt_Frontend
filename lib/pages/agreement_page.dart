@@ -44,7 +44,7 @@ class _AgreementPageState extends State<AgreementPage> {
 
   hasAcceptedAgreementLocalVariable() {
     if (Constants.prefs!.getBool("agreement-accepted") == true) {
-      SchedulerBinding.instance!.addPostFrameCallback((_) async {
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/permissions', (Route<dynamic> route) => false);
       });

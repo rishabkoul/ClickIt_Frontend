@@ -44,7 +44,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
                 const SizedBox(height: 20),
                 Text('Congratulations..',
                     style: GoogleFonts.dancingScript(
-                        textStyle: Theme.of(context).textTheme.headline4,
+                        textStyle: Theme.of(context).textTheme.headlineMedium,
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
                         color: const Color(0xFFd4a177))),
@@ -53,7 +53,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
                 ),
                 Text('Welcome To',
                     style: GoogleFonts.dancingScript(
-                        textStyle: Theme.of(context).textTheme.headline4,
+                        textStyle: Theme.of(context).textTheme.headlineMedium,
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
                         color: const Color(0xFFd4a177))),
