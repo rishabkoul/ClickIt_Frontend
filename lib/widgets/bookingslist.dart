@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../pages/booking_page.dart';
+import '../constants.dart' as constants;
 
 class BookingsList extends StatefulWidget {
   final List data;
@@ -29,7 +30,7 @@ class _BookingsListState extends State<BookingsList> {
             title: Text(widget.data[index]["booked_name"]!),
             subtitle: Text(subtitle),
             leading: Image.network(
-                "https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg"),
+                "${constants.imageProxyUrl}https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg"),
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,

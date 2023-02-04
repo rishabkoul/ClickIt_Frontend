@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants.dart' as constants;
 
 class PhotographerDetail extends StatelessWidget {
   final Map data;
@@ -13,7 +14,7 @@ class PhotographerDetail extends StatelessWidget {
           CircleAvatar(
             radius: MediaQuery.of(context).size.width / 5,
             backgroundImage: const NetworkImage(
-                "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMHBpY3R1cmUlMjBtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"),
+                "${constants.imageProxyUrl}https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMHBpY3R1cmUlMjBtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"),
           ),
           const SizedBox(
             height: 20,
