@@ -1,11 +1,11 @@
 import 'dart:io';
-
 import 'package:click_it/pages/agreement_page.dart';
 import 'package:click_it/pages/bookings_page.dart';
 import 'package:click_it/pages/editprofile_page.dart';
 import 'package:click_it/pages/login_page.dart';
 import 'package:click_it/pages/permissions_page.dart';
 import 'package:click_it/pages/photgraphers_page.dart';
+import 'package:click_it/pages/setloation_page_web.dart';
 import 'package:click_it/pages/setlocation_page.dart';
 import 'package:click_it/pages/signup_page.dart';
 import 'package:click_it/utlis/constants.dart';
@@ -59,6 +59,7 @@ Future main() async {
         "/photographers": (context) => const PhotographersPage(),
         "/login": ((context) => const LoginPage()),
         "/editprofile": ((context) => const EditProfilePage()),
-        "/bookings": ((context) => const BookingsPage())
+        "/bookings": ((context) => const BookingsPage()),
+        "/setlocationweb": ((context) => const SetLocationPageWeb())
       }));
 }

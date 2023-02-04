@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:click_it/widgets/logout.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_api_headers/google_api_headers.dart';
@@ -26,7 +27,7 @@ class SetLocationPage extends StatefulWidget {
   State<SetLocationPage> createState() => _SetLocationPageState();
 }
 
-const kGoogleApiKey = 'YOUR_GOOGLE_API_KEY';
+const kGoogleApiKey = 'your google api key here';
 final homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _SetLocationPageState extends State<SetLocationPage> {
@@ -80,6 +81,11 @@ class _SetLocationPageState extends State<SetLocationPage> {
   void initState() {
     super.initState();
 
+    if (kIsWeb) {
+      goToSetLocationWebPage();
+      return;
+    }
+
     if (Constants.prefs!.getString("name") == null ||
         Constants.prefs!.getString("name") == "") {
       goToEditProfilePage();
@@ -89,8 +95,15 @@ class _SetLocationPageState extends State<SetLocationPage> {
     setCurrentLocation();
   }
 
+  goToSetLocationWebPage() {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/setlocationweb', (Route<dynamic> route) => false);
+    });
+  }
+
   goToEditProfilePage() {
-    SchedulerBinding.instance!.addPostFrameCallback((_) async {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
       Navigator.of(context).pushNamedAndRemoveUntil(
           '/editprofile', (Route<dynamic> route) => false);
     });

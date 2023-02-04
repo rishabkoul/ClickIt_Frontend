@@ -51,6 +51,8 @@ dependencies:
   google_maps_flutter: ^2.1.1
   image_picker: ^0.8.5+3
   syncfusion_flutter_datepicker: 20.1.55
+  location: ^4.4.0
+  syncfusion_flutter_maps: ^20.4.48
 
 dev_dependencies:
   flutter_test:
