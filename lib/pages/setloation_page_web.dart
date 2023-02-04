@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:click_it/widgets/logout.dart';
 import 'package:click_it/widgets/show_alert.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:click_it/utlis/constants.dart';
@@ -21,7 +22,7 @@ class SetLocationPageWeb extends StatefulWidget {
   State<SetLocationPageWeb> createState() => _SetLocationPageWebState();
 }
 
-const kGoogleApiKey = 'your google api here';
+const kGoogleApiKey = 'AIzaSyBfUeSVUP0vDG89czs1IyfKH4c7SfJ1rJ0';
 final homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _SetLocationPageWebState extends State<SetLocationPageWeb> {
@@ -250,8 +251,12 @@ class _SetLocationPageWebState extends State<SetLocationPageWeb> {
         onError: onError,
         mode: _mode,
         language: 'en',
+        headers: {"x-requested-with": "XMLHttpRequest"},
         strictbounds: false,
         types: [""],
+        proxyBaseUrl: kIsWeb
+            ? 'https://proxy.cors.sh/https://maps.googleapis.com/maps/api'
+            : null,
         components: [Component(Component.country, "in")]);
 
     if (p != null) {
@@ -269,8 +274,14 @@ class _SetLocationPageWebState extends State<SetLocationPageWeb> {
     fetchingLocation = true;
     setState(() {});
     GoogleMapsPlaces places = GoogleMapsPlaces(
-        apiKey: kGoogleApiKey,
-        apiHeaders: await const GoogleApiHeaders().getHeaders());
+      apiKey: kGoogleApiKey,
+      apiHeaders: kIsWeb
+          ? {"x-requested-with": "XMLHttpRequest"}
+          : await const GoogleApiHeaders().getHeaders(),
+      baseUrl: kIsWeb
+          ? 'https://proxy.cors.sh/https://maps.googleapis.com/maps/api'
+          : null,
+    );
     PlacesDetailsResponse detail = await places.getDetailsByPlaceId(p.placeId!);
 
     final lat = detail.result.geometry!.location.lat;
