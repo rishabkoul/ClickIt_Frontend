@@ -44,6 +44,7 @@ dependencies:
   http: ^0.13.4
   shared_preferences: ^2.0.5
   package_info_plus_web: ^2.0.0
+  file_picker: ^5.2.5
 
   flutter_google_places_hoc081098: ^1.0.0-nullsafety.5
   google_api_headers: ^1.1.1

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:click_it/widgets/show_alert.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:click_it/utlis/constants.dart';
@@ -22,6 +24,7 @@ class EditProfileForm extends StatefulWidget {
 
 class _EditProfileFormState extends State<EditProfileForm> {
   XFile? _imageFile;
+  Uint8List? selectedImageInBytes;
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _phonecontroller = TextEditingController();
@@ -200,18 +203,20 @@ class _EditProfileFormState extends State<EditProfileForm> {
           children: [
             CircleAvatar(
               radius: MediaQuery.of(context).size.width / 5,
-              backgroundImage: _imageFile == null
-                  ? const AssetImage("assets/images/profile_image.jpeg")
-                  : Image.file(File(_imageFile!.path)).image,
+              backgroundImage: getImage(),
             ),
             Positioned(
                 bottom: MediaQuery.of(context).size.width / 20,
                 right: MediaQuery.of(context).size.width / 20,
                 child: InkWell(
                   onTap: () {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: ((builder) => bottomSheetPhoto()));
+                    if (kIsWeb) {
+                      selectPhotoWeb();
+                    } else {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: ((builder) => bottomSheetPhoto()));
+                    }
                   },
                   child: const Icon(
                     Icons.camera_alt,
@@ -362,10 +367,29 @@ class _EditProfileFormState extends State<EditProfileForm> {
     ));
   }
 
+  selectPhotoWeb() async {
+    FilePickerResult? fileResult = await FilePicker.platform.pickFiles();
+    if (fileResult != null) {
+      setState(() {
+        selectedImageInBytes = fileResult.files.first.bytes;
+      });
+    }
+  }
+
   void takePhoto(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
     setState(() {
       _imageFile = pickedFile;
     });
+  }
+
+  getImage() {
+    if (_imageFile == null && selectedImageInBytes == null) {
+      return const AssetImage("assets/images/profile_image.jpeg");
+    } else if (_imageFile == null) {
+      return Image.memory(selectedImageInBytes!).image;
+    } else {
+      return Image.file(File(_imageFile!.path)).image;
+    }
   }
 }
