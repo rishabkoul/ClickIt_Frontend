@@ -1,5 +1,6 @@
 import 'package:click_it/pages/photographer_page.dart';
 import 'package:flutter/material.dart';
+import '../constants.dart' as constants;
 
 class PhotographersList extends StatefulWidget {
   final List data;
@@ -28,7 +29,7 @@ class _PhotographersListState extends State<PhotographersList> {
                 )
             ]),
             leading: Image.network(
-                "https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg"),
+                "${constants.imageProxyUrl}https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg"),
             trailing: Text("${widget.data[index]["ratePerDay"]} ₹/Day"),
             children: [
               const SizedBox(
