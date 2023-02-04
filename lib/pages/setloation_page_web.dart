@@ -22,7 +22,7 @@ class SetLocationPageWeb extends StatefulWidget {
   State<SetLocationPageWeb> createState() => _SetLocationPageWebState();
 }
 
-const kGoogleApiKey = 'AIzaSyBfUeSVUP0vDG89czs1IyfKH4c7SfJ1rJ0';
+const kGoogleApiKey = 'your web api here';
 final homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _SetLocationPageWebState extends State<SetLocationPageWeb> {
